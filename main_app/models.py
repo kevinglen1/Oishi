@@ -4,8 +4,8 @@ from datetime import date
 # Import the User
 from django.contrib.auth.models import User
 
-class Cat(models.Model):
+class Product(models.Model):
 
-  toys = models.ManyToManyField(Toy)
+  stores = models.ManyToManyField(Store)
   # Add the foreign key linking to a user instance
   user = models.ForeignKey(User, on_delete=models.CASCADE)

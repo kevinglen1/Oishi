@@ -18,18 +18,17 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Oishi</a></li>
         </ul>
         <ul class="right">
-            <li><a href="{% url 'about' %}">About</a></li>
-            {% if user.is_authenticated %}
-              <li><a href="{% url 'wishlist_create' %}">Add to Wishlist</a></li>
-              <li><a href="{% url 'wishlist_index' %}">View Wishlist</a></li>
-              <li><a href="{% url 'product_create' %}">Created Product Listing</a></li>
-              <li><a href="{% url 'index' %}">View All Products</a></li>
-              <li><a href="{% url 'logout' %}">Log Out</a></li>
-            {% else %}
-              <li><a href="{% url 'signup' %}">Sign Up</a></li>
-              <li><a href="{% url 'login' %}">Log In</a></li>
-            {% endif %}
-          </ul>
+          <li><a href="{% url 'about' %}">About</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'stores_create' %}">Add a Store</a></li>
+            <li><a href="{% url 'stores_index' %}">View All Stores</a></li>
+            <li><a href="{% url 'products_create' %}">Add a Product</a></li>
+            <li><a href="{% url 'index' %}">View All My Products</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>

@@ -115,10 +115,12 @@ class StoreDetail(LoginRequiredMixin, DetailView):
 class StoreCreate(LoginRequiredMixin, CreateView):
   model = Store
   fields = '__all__'
+  success_url = '/stores/'
 
 class StoreUpdate(LoginRequiredMixin, UpdateView):
   model = Store
   fields = ['name', 'postcode','contact_infor']
+  success_url = '/stores/'
 
 class StoreDelete(LoginRequiredMixin, DeleteView):
   model = Store

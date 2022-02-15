@@ -4,6 +4,20 @@
 
 <h1>Product List</h1>
 
+<div class="nav-wrapper">
+  <form method=POST action="{% url 'search_products' %}">
+    {% csrf_token %}
+    <div class="input-field">
+      <input id="search" type="search" required name="searched">
+      <label class="label-icon" for="search"><i class="material-icons">Search</i></label>
+      <i class="material-icons">close</i>
+      <input id="postal-code" type="text" name="postal-code" maxlength="6">
+      <label class="label-icon" for="postal-code"><i class="material-icons">Postal Code</i></label>
+    </div>
+    <button type="submit">Search</button>
+  </form>
+</div>
+
 {% for product in products %}
   <a href="{% url 'detail' product.id %}">
     <div class="card">

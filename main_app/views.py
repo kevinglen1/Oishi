@@ -12,6 +12,17 @@ from .models import Product, Store
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'oishi'
 
+def search_products(request):
+  if request.method == "POST":
+    searched = request.POST['searched']
+    products = Product.objects.filter(name__contains=searched)
+
+    return render(request, 'products/search_products.html', {'searched': searched, 'products': products})
+  else:
+    return render(request, 'products/search_products.html', {})
+
+
+
 def signup(request):
   error_message = ''
   if request.method == 'POST':

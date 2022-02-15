@@ -1,29 +1,51 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+ <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Oishi</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<style>
+.nav-wrapper  {
+    background-color: green !important;
+    font-size: 14px;
+  }
+  
+.dropdown-button  {
+    background-color:green  !important;
+    font-size: 13px;
+
+  }  
+.page-footer {
+  background-color: green;
+  color:white;
+  font-size: 13px;
+}
+
+</style>
+ </head>
+
 <body>
-  <header class="navbar-fixed">
+  <div class="container">
+      <ul id="dropdown1" class="dropdown-content">
+        <li><a href="{% url 'stores_create' %}">Post Your Store</a></li>
+        <li><a href="{% url 'stores_index' %}">Store List</a></li>
+        <li><a href="{% url 'products_create' %}">Post Your Product</a></li>
+      </ul>
     <nav>
-      <div class="nav-wrapper">
-        <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Oishi</a></li>
-        </ul>
-        <ul class="right">
-          <li><a href="{% url 'about' %}">About</a></li>
+      <div class="nav-wrapper green">
+        <a href="/" class="left brand-logo">&nbsp;&nbsp;Oi Shi</a>
+        <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
-            <li><a href="{% url 'stores_create' %}">Add a Store</a></li>
-            <li><a href="{% url 'stores_index' %}">View All Stores</a></li>
-            <li><a href="{% url 'products_create' %}">Add a Product</a></li>
-            <li><a href="{% url 'index' %}">View All My Products</a></li>
+            <li><a href="{% url 'index' %}">View All Products</a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">My Account<i class="material-icons right">arrow_drop_down</i></a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
@@ -32,13 +54,17 @@
         </ul>
       </div>
     </nav>
-  </header>
+  </div>
   <main class="container">
     {% block content %}
     {% endblock %}
   </main>
-  <footer class="page-footer">
-    <div class="right">All Rights Reserved, &copy; 2019 Cat Collector &nbsp;</div>
+  <footer class="page-footer" >
+    <div >All Rights Reserved, &copy; 2022 Oi Shi</div>
   </footer>
+  <script>
+    $(".dropdown-trigger").dropdown();
+  </script>
 </body>
+
 </html>

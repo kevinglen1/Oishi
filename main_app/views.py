@@ -5,12 +5,15 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+S3_BASE_URL = 'https://s3-us-east-2.amazonaws.com/'
+BUCKET = 'gaoishi'
+import uuid
+import boto3
+from .models import Product, Store, Photo
 
-from .models import Product, Store
 
-
-S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
-BUCKET = 'oishi'
+S3_BASE_URL = 'https://s3-us-east-2.amazonaws.com/'
+BUCKET = 'gaoishi'
 
 def search_products(request):
   if request.method == "POST":
@@ -66,13 +69,12 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
-@login_required
+
 def products_index(request):
   products = Product.objects.filter(user = request.user)
 
   return render(request, 'products/index.html', { 'products': products })
 
-@login_required
 def products_detail(request, product_id):
   product = Product.objects.get(id=product_id)
 
@@ -87,25 +89,25 @@ def products_detail(request, product_id):
   })
 
 
-# @login_required
-# def add_photo(request, product_id):
-# 	# photo-file was the "name" attribute on the <input type="file">
-#   photo_file = request.FILES.get('photo-file', None)
-#   if photo_file:
-#     s3 = boto3.client('s3')
-#     # need a unique "key" for S3 / needs image file extension too
-#     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-#     # just in case something goes wrong
-#     try:
-#       s3.upload_fileobj(photo_file, BUCKET, key)
-#       # build the full url string
-#       url = f"{S3_BASE_URL}{BUCKET}/{key}"
+@login_required
+def add_photo(request, product_id):
+	# photo-file was the "name" attribute on the <input type="file">
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    # need a unique "key" for S3 / needs image file extension too
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    # just in case something goes wrong
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      # build the full url string
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
     
-#       photo = Photo(url=url, product_id=product_id)
-#       photo.save()
-#     except:
-#       print('An error occurred uploading file to S3')
-#   return redirect('detail', product_id=product_id)
+      photo = Photo(url=url, product_id=product_id)
+      photo.save()
+    except:
+      print('An error occurred uploading file to S3')
+  return redirect('detail', product_id=product_id)
 
 @login_required
 def assoc_store(request, product_id, store_id):
@@ -126,10 +128,12 @@ class StoreDetail(LoginRequiredMixin, DetailView):
 class StoreCreate(LoginRequiredMixin, CreateView):
   model = Store
   fields = '__all__'
+  success_url = '/stores/'
 
 class StoreUpdate(LoginRequiredMixin, UpdateView):
   model = Store
   fields = ['name', 'postcode','contact_infor']
+  success_url = '/stores/'
 
 class StoreDelete(LoginRequiredMixin, DeleteView):
   model = Store

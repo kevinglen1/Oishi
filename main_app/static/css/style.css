@@ -12,3 +12,7 @@ body {
     padding-top: 0;
     text-align: right;
   }
+
+  input#search, input#postal-code {
+    border: groove;
+  }

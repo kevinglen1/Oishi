@@ -13,6 +13,17 @@
     <label>Choose your Food Category</label>
   </div>
 
+  <form method=POST action="{% url 'search_products' %}">
+    {% csrf_token %}
+      <label for="search">Search</label>
+      <input id="search" type="search" required name="searched">
+      
+      <label for="postal-code">Postal Code</label>
+      <input id="postal-code" type="text" name="postal-code" maxlength="6">
+      
+    <button type="submit">Search</button>
+  </form> 
+
 {% for product in products %}
   <a href="{% url 'detail' product.id %}">
     <div class="card">

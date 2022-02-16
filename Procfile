@@ -1,1 +1,1 @@
-web: gunicorn oishi.wsgi
+web: gunicorn oishi .wsgi

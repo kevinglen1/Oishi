@@ -3,6 +3,15 @@
 
 
 <h1>Product List</h1>
+  <div class="input-field col s12">
+    <select>
+      <option value="" disabled selected>Choose your option</option>
+    {% for product in products %}
+      <option value={{product.category}}>{{product.category}}</option>
+    {% endfor %}
+    </select>
+    <label>Choose your Food Category</label>
+  </div>
 
   <form method=POST action="{% url 'search_products' %}">
     {% csrf_token %}
@@ -18,7 +27,7 @@
 {% for product in products %}
   <a href="{% url 'detail' product.id %}">
     <div class="card">
-        <div class="card-content">
+        <div class="card-content lime lighten-3">
             <span class="card-title">{{ product.name }}</span>
             <p>Category: {{ product.category }}</p>
             <p>Description: {{ product.description }}</p>

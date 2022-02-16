@@ -8,11 +8,22 @@ body {
     flex: 1 0 auto;
   }
   
-  footer.page-footer {
-    padding-top: 0;
-    text-align: right;
+.nav-wrapper  {
+    background-color: green;
+    font-size: 14px;
   }
+  
+.dropdown-button  {
+    background-color:green;
+    font-size: 13px;
 
-  input#search, input#postal-code {
-    border: groove;
-  }
+  }  
+
+footer.page-footer {
+  padding-top: 0;
+  text-align: right;
+}
+
+input#search, input#postal-code {
+  border: groove;
+}

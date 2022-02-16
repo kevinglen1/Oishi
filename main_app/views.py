@@ -99,8 +99,11 @@ def add_photo(request, product_id):
   return redirect('detail', product_id=product_id)
 
 @login_required
-def assoc_store(request, product_id, store_id):
-  Product.objects.get(id=product_id).stores.add(store_id)
+def assoc_store(request, product_id):
+  if request.method == "POST":
+    ab = request.POST['store']
+    print(ab)
+  Product.objects.get(id=product_id).stores.add(ab)
   return redirect('detail', product_id=product_id)
 
 @login_required

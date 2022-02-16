@@ -4,28 +4,12 @@
 <html>
  <head>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+ <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-<style>
-.nav-wrapper  {
-    background-color: green !important;
-    font-size: 14px;
-  }
-  
-.dropdown-button  {
-    background-color:green  !important;
-    font-size: 13px;
 
-  }  
-.page-footer {
-  background-color: green;
-  color:white;
-  font-size: 13px;
-}
-
-</style>
  </head>
 <body>
   <div class="container">
@@ -54,8 +38,8 @@
     {% block content %}
     {% endblock %}
   </main>
-  <footer class="page-footer" >
-    <div >All Rights Reserved, &copy; 2022 Oi Shi</div>
+  <footer  >
+    <div class="green">All Rights Reserved, &copy; 2022 Oi Shi</div>
   </footer>
   <script>
     $(".dropdown-trigger").dropdown();

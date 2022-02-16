@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Search Products</h1>
+
 
 {% if searched %}
-    <h1>you searched for {{ searched }}</h1>
+    <h3>you searched for {{ searched }}</h3>
     {% for product in products %}
     <a href="{% url 'detail' product.id %}">
         <div class="card">
-            <div class="card-content">
+            <div class="card-content lime lighten-4">
                 <span class="card-title">{{ product.name }}</span>
                 <p>Category: {{ product.category }}</p>
                 <p>Description: {{ product.description }}</p>

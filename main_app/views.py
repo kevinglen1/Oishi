@@ -71,7 +71,7 @@ def about(request):
 
 
 def products_index(request):
-  products = Product.objects.filter(user = request.user)
+  products = Product.objects.all()
 
   return render(request, 'products/index.html', { 'products': products })
 

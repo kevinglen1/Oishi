@@ -71,7 +71,7 @@ def about(request):
 
 
 def products_index(request):
-  products = Product.objects.filter(user = request.user)
+  products = Product.objects.all()
 
   return render(request, 'products/index.html', { 'products': products })
 
@@ -84,23 +84,23 @@ def products_detail(request, product_id):
   return render(request, 'products/detail.html', {
 
     'product': product, 
-
-    'stores': stores_product_doesnt_have
+    'stores': stores_product_doesnt_have,
+    'user': request.user
   })
 
 
 @login_required
 def add_photo(request, product_id):
-	# photo-file was the "name" attribute on the <input type="file">
+	
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
     s3 = boto3.client('s3')
-    # need a unique "key" for S3 / needs image file extension too
+  
     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-    # just in case something goes wrong
+  
     try:
       s3.upload_fileobj(photo_file, BUCKET, key)
-      # build the full url string
+   
       url = f"{S3_BASE_URL}{BUCKET}/{key}"
     
       photo = Photo(url=url, product_id=product_id)
@@ -128,10 +128,22 @@ class StoreList(LoginRequiredMixin, ListView):
 class StoreDetail(LoginRequiredMixin, DetailView):
   model = Store
 
+def stores_detail(request, store_id):
+  store = Store.objects.get(id=store_id)
+  return render(request, 'main_app/store_detail.html', {
+    'store': store, 
+    'user': request.user
+  })
+
 class StoreCreate(LoginRequiredMixin, CreateView):
   model = Store
-  fields = '__all__'
+  fields = ['name','postcode','contact_infor']
   success_url = '/stores/'
+  def form_valid(self, form):
+  
+    form.instance.user = self.request.user  
+   
+    return super().form_valid(form)
 
 class StoreUpdate(LoginRequiredMixin, UpdateView):
   model = Store

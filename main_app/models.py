@@ -8,6 +8,8 @@ class Store(models.Model):
      postcode=models.CharField(max_length=50)
      contact_infor=models.CharField(max_length=50)
      offer_delivery=models.BooleanField(default=True)
+     user = models.ForeignKey(User, on_delete=models.CASCADE)
+  
 
 class Product(models.Model):
   name = models.CharField(max_length=100)

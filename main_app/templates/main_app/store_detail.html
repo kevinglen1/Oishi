@@ -12,8 +12,10 @@
         <p>ContactInfor: {{ store.contact_infor }}</p>
       </div>
       <div class="card-action">
-        <a href="{% url 'stores_update' store.id %}">Edit</a>
-        <a href="{% url 'stores_delete' store.id %}">Delete</a>
+        {% if store.user == user %}
+          <a href="{% url 'stores_update' store.id %}">Edit</a>
+          <a href="{% url 'stores_delete' store.id %}">Delete</a>
+        {% endif %}
       </div>
     </div>
   </div>

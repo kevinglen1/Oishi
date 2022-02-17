@@ -26,8 +26,10 @@
        
       </div>
       <div class="card-action lime lighten-5">
+        {% if product.user == user %}
         <a href="{% url 'products_update' product.id %}">Edit</a>
         <a href="{% url 'products_delete' product.id %}">Delete</a>
+        {% endif %}
       </div>
     </div>
     

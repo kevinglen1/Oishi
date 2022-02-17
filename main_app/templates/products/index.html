@@ -3,7 +3,6 @@
 
 
 <h2>Product Search</h2>
-
   <form method=POST action="{% url 'search_products' %}">
     {% csrf_token %}
       <label for="search">Search</label>
@@ -15,16 +14,30 @@
     <button type="submit">Search</button>
   </form> 
 
-<h2>Product List</h2>
+<h2>Newly Added Products</h2>
 
+<div class="slider">
+  <ul class="slides">
+    {% for product in products|slice:"4" %}
+      {% for photo in product.photo_set.all %}
+      <li>
+        <img class="responsive-img card-panel" width="250" height ="250" src="{{photo.url}}">
+      </li>
+      {% endfor %}
+    {% endfor %}
+  </ul>
+</div>
 {% for product in products %}
   <a href="{% url 'detail' product.id %}">
-    <div class="card">
+    <div class="card" >
         <div class="card-content lime lighten-3">
             <span class="card-title">{{ product.name }}</span>
             <p>Category: {{ product.category }}</p>
             <p>Description: {{ product.description }}</p>
-       
+            {% for photo in product.photo_set.all %}
+            <img class="responsive-img card-panel" width="250" height ="250" src="{{photo.url}}">
+            {% endfor %}
+       </div>
     </div>
   </a>
 {% endfor %}

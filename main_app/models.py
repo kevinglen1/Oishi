@@ -8,6 +8,8 @@ class Store(models.Model):
      postcode=models.CharField(max_length=50)
      contact_infor=models.CharField(max_length=50)
      offer_delivery=models.BooleanField(default=True)
+     user = models.ForeignKey(User, on_delete=models.CASCADE)
+  
 
 class Product(models.Model):
   name = models.CharField(max_length=100)
@@ -15,6 +17,9 @@ class Product(models.Model):
   description = models.TextField(max_length=250)
   stores = models.ManyToManyField(Store)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
+  
+  class Meta:
+      ordering=('-id',)
 
   def __str__(self):
     return self.name

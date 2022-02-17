@@ -83,8 +83,8 @@ def products_detail(request, product_id):
   return render(request, 'products/detail.html', {
 
     'product': product, 
-
-    'stores': stores_product_doesnt_have
+    'stores': stores_product_doesnt_have,
+    'user': request.user
   })
 
 
@@ -94,12 +94,12 @@ def add_photo(request, product_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
     s3 = boto3.client('s3')
-   
+  
     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-    
+  
     try:
       s3.upload_fileobj(photo_file, BUCKET, key)
-      
+   
       url = f"{S3_BASE_URL}{BUCKET}/{key}"
     
       photo = Photo(url=url, product_id=product_id)
@@ -127,10 +127,22 @@ class StoreList(LoginRequiredMixin, ListView):
 class StoreDetail(LoginRequiredMixin, DetailView):
   model = Store
 
+def stores_detail(request, store_id):
+  store = Store.objects.get(id=store_id)
+  return render(request, 'main_app/store_detail.html', {
+    'store': store, 
+    'user': request.user
+  })
+
 class StoreCreate(LoginRequiredMixin, CreateView):
   model = Store
   fields = ['name','postcode','contact_infor']
   success_url = '/stores/'
+  def form_valid(self, form):
+  
+    form.instance.user = self.request.user  
+   
+    return super().form_valid(form)
 
 class StoreUpdate(LoginRequiredMixin, UpdateView):
   model = Store

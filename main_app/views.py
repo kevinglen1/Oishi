@@ -29,18 +29,17 @@ def search_products(request):
 def signup(request):
   error_message = ''
   if request.method == 'POST':
-    # This is how to create a 'user' form object
-    # that includes the data from the browser
+    
     form = UserCreationForm(request.POST)
     if form.is_valid():
-      # This will add the user to the database
+     
       user = form.save()
-      # This is how we log a user in via code
+      
       login(request, user)
       return redirect('index')
     else:
       error_message = 'Invalid credentials - try again'
-  # A bad POST or a GET request, so render signup.html with an empty form
+ 
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
@@ -50,9 +49,9 @@ class ProductCreate(LoginRequiredMixin, CreateView):
   fields = ['name', 'category', 'description']
 
   def form_valid(self, form):
-    # Assign the logged in user
+   
     form.instance.user = self.request.user
-    # Let the CreateView do its job as usual
+    
     return super().form_valid(form)
 
 class ProductUpdate(LoginRequiredMixin, UpdateView):

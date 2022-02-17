@@ -46,10 +46,12 @@
             Store Name: {{ store.name }} <br/>
             Post Code: {{ store.postcode }}<br/>
             Contact Infor:{{store.contact_infor}}
-            <form action="{% url 'unassoc_store' product.id store.id %}" method="post">
+            {% if product.user == user %}
+             <form action="{% url 'unassoc_store' product.id store.id %}" method="post">
                 {% csrf_token %}
               <button type="submit" class="waves-effect waves-light btn-small red">Remove</button>
-            </form>
+             </form>
+            {% endif %}
         
         </div>
       {% endfor %}

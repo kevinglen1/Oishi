@@ -15,6 +15,9 @@ class Product(models.Model):
   description = models.TextField(max_length=250)
   stores = models.ManyToManyField(Store)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
+  
+  class Meta:
+      ordering=('-id',)
 
   def __str__(self):
     return self.name

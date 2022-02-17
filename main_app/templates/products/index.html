@@ -4,6 +4,8 @@
 
 <h2>Product Search</h2>
 
+
+
   <form method=POST action="{% url 'search_products' %}">
     {% csrf_token %}
       <label for="search">Search</label>
@@ -15,16 +17,51 @@
     <button type="submit">Search</button>
   </form> 
 
-<h2>Product List</h2>
+<h2>Newly Added Products</h2>
 
+<div class="slider">
+  <ul class="slides">
+    <li>
+      <img src="https://lorempixel.com/580/250/nature/1"> 
+      <div class="caption center-align">
+        <h3>This is our big Tagline!</h3>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      </div>
+    </li>
+    <li>
+      <img src="https://lorempixel.com/580/250/nature/2"> 
+      <div class="caption left-align">
+        <h3>Left Aligned Caption</h3>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      </div>
+    </li>
+    <li>
+      <img src="https://lorempixel.com/580/250/nature/3"> 
+      <div class="caption right-align">
+        <h3>Right Aligned Caption</h3>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      </div>
+    </li>
+    <li>
+      <img src="https://lorempixel.com/580/250/nature/4"> 
+      <div class="caption center-align">
+        <h3>This is our big Tagline!</h3>
+        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      </div>
+    </li>
+  </ul>
+</div>
 {% for product in products %}
   <a href="{% url 'detail' product.id %}">
-    <div class="card">
+    <div class="card" >
         <div class="card-content lime lighten-3">
             <span class="card-title">{{ product.name }}</span>
             <p>Category: {{ product.category }}</p>
             <p>Description: {{ product.description }}</p>
-       
+            {% for photo in product.photo_set.all %}
+            <img class="responsive-img card-panel" width="250" height ="250" src="{{photo.url}}">
+            {% endfor %}
+       </div>
     </div>
   </a>
 {% endfor %}

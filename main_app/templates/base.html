@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Oishi</title>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  
  <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -20,8 +20,8 @@
     <nav>
       <div class="nav-wrapper green">
 
-        {% comment %} working on mobileView {% endcomment %}
-        <a href="#" data-target="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+    
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
             <li><a href="{% url 'index' %}">View All Products</a></li>
@@ -34,11 +34,15 @@
             <li><a href="{% url 'login' %}">Log In</a></li>
           {% endif %}
         </ul>
-        {% comment %} implementing mobileView {% endcomment %}
-        <ul class="side-nav" id ="slide-out">
+      </div>
+      </nav>
+   
+      <ul class="sidenav" id="mobile-demo">
           {% if user.is_authenticated %}
             <li><a href="{% url 'index' %}">View All Products</a></li>
-            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">My Account<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a href="{% url 'stores_create' %}">Post Your Store</a></li>
+            <li><a href="{% url 'stores_index' %}">Store List</a></li>
+            <li><a href="{% url 'products_create' %}">Post Your Product</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
@@ -56,5 +60,10 @@
     <div class="green">All Rights Reserved, &copy; 2022 Oi Shi</div>
   </footer>
 </body>
+<script>
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+</script>
 
 </html>

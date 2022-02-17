@@ -63,7 +63,7 @@
       <div class = "row">
         <form action="{% url 'assoc_store' product.id %}" method="post">
           {% csrf_token %}
-         <select name="store">
+            <select name="store">
                 <option value = "" disabled selected>Select a Store Available</option>
               {% for store in stores.all %}
                 <option value = "{{store.id}}">{{store.id}}: {{store.name}}</option>
@@ -79,9 +79,8 @@
   </div>
 
 <script>
- $(document).ready(function() {
-            $('select').material_select();
-         });
- 
+   $(document).ready(function(){
+    $('select').formSelect();
+  });
 </script>
 {% endblock %}

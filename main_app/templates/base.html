@@ -21,7 +21,7 @@
       <div class="nav-wrapper green">
 
         {% comment %} working on mobileView {% endcomment %}
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <a href="#" data-target="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
             <li><a href="{% url 'index' %}">View All Products</a></li>

@@ -17,11 +17,6 @@
 
 <body>
   <div class="">
-      <ul id="dropdown1" class="dropdown-content">
-        <li><a href="{% url 'stores_create' %}">Post Your Store</a></li>
-        <li><a href="{% url 'stores_index' %}">Store List</a></li>
-        <li><a href="{% url 'products_create' %}">Post Your Product</a></li>
-      </ul>
     <nav>
       <div class="nav-wrapper green">
         <a href="/" class="center brand-logo">&nbsp;&nbsp;Oi Shi</a>
@@ -30,7 +25,9 @@
         <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
             <li><a href="{% url 'index' %}">View All Products</a></li>
-            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">My Account<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a href="{% url 'stores_create' %}">Post Your Store</a></li>
+            <li><a href="{% url 'stores_index' %}">Store List</a></li>
+            <li><a href="{% url 'products_create' %}">Post Your Product</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
@@ -58,13 +55,6 @@
   <footer  >
     <div class="green">All Rights Reserved, &copy; 2022 Oi Shi</div>
   </footer>
-  <script>
-    $(document).ready(function(){
-    $('.sidenav').sidenav();
-  });
-    $(".dropdown-button").dropdown();
-    $(".button-collapse").sideNav();
-  </script>
 </body>
 
 </html>

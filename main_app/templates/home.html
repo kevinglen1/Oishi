@@ -1,8 +1,17 @@
+
 {% extends 'base.html' %}
+{% load static %} <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 {% block content %}
 
 
-<hr />
-<p>Welcome to Oishi</p>
+<div class="home-centered center-align">
+  {% load static %} <img src="{% static "/media/Logo Oishi.png" %}" alt="Logo" class="responsive-img"/>
+
+  <p>An app dedicated to finding the availabilty of cultural specialty foods in grocery stores.</p>
+        
+          
+        
+    </div>
+        
 
 {% endblock %}

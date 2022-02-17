@@ -27,3 +27,12 @@ footer.page-footer {
 input#search, input#postal-code {
   border: groove;
 }
+div.home-buttons {
+  margin: 20px;
+}
+
+.home-centered {
+  margin: auto;
+  width: 50%;
+  padding: 50px;
+}

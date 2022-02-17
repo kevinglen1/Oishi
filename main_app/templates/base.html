@@ -9,16 +9,14 @@
   <title>Oishi</title>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
- <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
- <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
  
-</head>
-
+ <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+ </head>
 
 <body>
   <div class="">
- 
     <nav>
       <div class="nav-wrapper green">
 
@@ -37,7 +35,7 @@
           {% endif %}
         </ul>
         {% comment %} implementing mobileView {% endcomment %}
-        <ul class="side-nav" id ="mobile-demo">
+        <ul class="side-nav" id ="slide-out">
           {% if user.is_authenticated %}
             <li><a href="{% url 'index' %}">View All Products</a></li>
             <li><a class="dropdown-button" href="#!" data-activates="dropdown1">My Account<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -57,9 +55,6 @@
   <footer  >
     <div class="green">All Rights Reserved, &copy; 2022 Oi Shi</div>
   </footer>
-  <script>
-   
-  </script>
 </body>
 
 </html>

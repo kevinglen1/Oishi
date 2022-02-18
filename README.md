@@ -1,7 +1,9 @@
 # App Title: OISHI
 An app dedicated to finding the availabilty of cultural specialty foods in grocery stores.
 
-☐ Screenshot(s): A screenshot of your app's landing page and any other screenshots of interest.
+# Screenshot(s): 
+
+![A Screenshot](screen-shot.png)
 
 # Technologies Used: 
 Django, Python, Materialize, PostgreSQL, HTML, CSS
